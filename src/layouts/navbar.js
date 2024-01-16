@@ -31,15 +31,6 @@ const Navbar = () => {
     setDropdownOpen(false); 
   };
 
-  // if(outSideClick===1 && isDropdownOpen===true){
-  //     setStyle({
-  //       transform: 'rotate(270deg)',
-  //       transition: 'transform 150ms ease',
-  //     });
-  //   setDropdownOpen(!isDropdownOpen);
-  //   handleOutSideClick();
-  // }
-
   return (
     <div className="bg-gray-800 text-white">    
       <div className="container  flex justify-between items-center py-4">
@@ -47,7 +38,7 @@ const Navbar = () => {
           <span className="ml-2 text-lg font-semibold sm:inline ">Dynamics</span>
         </div>
 
-        <div className=" dropdownmenu relative group bg-white text-black rounded mr-4 p-2" id='dropdownmeu' name="dropdownmenu" >
+        <div className="dropdownmenu relative group bg-white text-black rounded mr-4 p-2" id='dropdownmeu' name="dropdownmenu" >
           {/* Hide on small devices */}
           <span className=" full_name hidden sm:inline cursor-pointer" id="full_name" name="full_name" onClick={toggleDropdown}>
             Full_Name
