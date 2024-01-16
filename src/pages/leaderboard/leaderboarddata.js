@@ -7,6 +7,7 @@ export const Users = [
         leet:1610,
         chef:1210,
         force:1810,
+        spoj:2000,
         total:7900
     },
     {
@@ -17,6 +18,7 @@ export const Users = [
         leet:110,
         chef:1210,
         force:80,
+        spoj:2000,
         total:5000
     },
     {
@@ -27,6 +29,7 @@ export const Users = [
         leet:130,
         chef:210,
         force:710,
+        spoj:2000,
         total:3100
     },
     {
@@ -37,6 +40,7 @@ export const Users = [
         leet:1423,
         chef:217,
         force:813,
+        spoj:2000,
         total:2690
     },
     {
@@ -47,6 +51,7 @@ export const Users = [
         leet:1012,
         chef:234,
         force:510,
+        spoj:2000,
         total:3900
     },
     {
@@ -57,6 +62,7 @@ export const Users = [
         leet:1510,
         chef:260,
         force:700,
+        spoj:2000,
         total:8600
     },
     {
@@ -67,6 +73,7 @@ export const Users = [
         leet:7897,
         chef:213,
         force:8809,
+        spoj:2000,
         total:6794
     },
     {
@@ -77,6 +84,7 @@ export const Users = [
         leet:456,
         chef:456,
         force:809,
+        spoj:2000,
         total:690
     },
     {
@@ -87,6 +95,7 @@ export const Users = [
         leet:141,
         chef:215,
         force:8180,
+        spoj:2000,
         total:6980
     },
     {
@@ -97,6 +106,7 @@ export const Users = [
         leet:8908,
         chef:567,
         force:768,
+        spoj:2000,
         total:348
     },
     {
@@ -107,6 +117,7 @@ export const Users = [
         leet:5799,
         chef:9858,
         force:8108,
+        spoj:2000,
         total:8972
     },
     {
@@ -117,6 +128,7 @@ export const Users = [
         leet:6797,
         chef:8979,
         force:980,
+        spoj:2000,
         total:5669
     },
     {
@@ -127,6 +139,7 @@ export const Users = [
         leet:6989,
         chef:878,
         force:897,
+        spoj:2000,
         total:9999
     },
     {
@@ -137,6 +150,7 @@ export const Users = [
         leet:7890,
         chef:6986,
         force:3567,
+        spoj:2000,
         total:8898
     },
     {
@@ -147,6 +161,7 @@ export const Users = [
         leet:3425,
         chef:219,
         force:8170,
+        spoj:2000,
         total:6945
     },
     {
@@ -157,6 +172,7 @@ export const Users = [
         leet:7987,
         chef:8789,
         force:7980,
+        spoj:2000,
         total:7987
     },
     {
@@ -167,6 +183,7 @@ export const Users = [
         leet:3793,
         chef:210,
         force:810,
+        spoj:2000,
         total:6900
     },
     {
@@ -177,6 +194,7 @@ export const Users = [
         leet:1410,
         chef:210,
         force:810,
+        spoj:2000,
         total:6900
     },
     {
@@ -187,6 +205,7 @@ export const Users = [
         leet:1410,
         chef:210,
         force:810,
+        spoj:2000,
         total:6900
     },
     {
@@ -197,6 +216,7 @@ export const Users = [
         leet:7989,
         chef:2108,
         force:8780,
+        spoj:2000,
         total:9990
     },
 ];
