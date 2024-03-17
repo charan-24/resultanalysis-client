@@ -1,42 +1,29 @@
-export const Batches = [
-    {
-        id:1,
-        name:"VNR-2023-24-P1",
-        status:"Completed",
-    },
-    {
-        id:2,
-        name:"VNR-2023-24-P2",
-        status:"Hold",
-    },
-    {
-        id:3,
-        name:"VNR-2022-23-P1",
-        status:"Completed",
-    },
-    {
-        id:4,
-        name:"VNR-2022-23-P2",
-        status:"Active",
-    },
-    {
-        id:5,
-        name:"VNR-2021-22-P1",
-        status:"Completed",
-    },
-    {
-        id:6,
-        name:"VNR-2021-22-P2",
-        status:"Completed",
-    },
-    {
-        id:7,
-        name:"VNR-2020-21-P1",
-        status:"Completed",
-    },
-    {
-        id:8,
-        name:"VNR-2020-21-P2",
-        status:"Completed",
-    },
-];
+// import axios from 'axios';
+// import { useState,useEffect } from "react";
+
+// const GetBatches = async ({getBatches}) => {
+//     const [Batches,setBatches] = useState([]);
+//     const arr = [];
+//     const response = await axios.get('http://localhost:5000/batch/getBatches')
+//                                 .then(res=>{
+//                                     // console.log(res.data);
+//                                     res.data.map(item=>{
+//                                         arr.push({
+//                                             id:item._id,
+//                                             batchname:item.batchname,
+//                                             status: item.batchstatus,
+//                                         })
+//                                     })
+//                                     console.log(arr);
+//                                     setBatches(arr);
+                                    
+//                                 })
+//                                 .catch(err=>console.error(err));
+//     useEffect(()=>{
+//         if(Batches.length>=1){
+//             getBatches()
+//         }
+//     },[]) 
+// }
+
+// export default GetBatches;

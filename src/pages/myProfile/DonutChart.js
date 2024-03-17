@@ -1,14 +1,14 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const DonutChart = () => {
+
+const DonutChart = ({donutData}) => {
   const data = {
-    labels: ['Hackerrank', 'CodeChef', 'Codeforces', 'LeetCode'],
+    labels: ['Hackerrank', 'LeetCode', 'CodeChef', 'CodeForces','Spoj','InterviewBit'],
     datasets: [
       {
-        data: [300, 450, 200, 600],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+        data: donutData,
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50','#F74304','#C704F7'],
       },
     ],
   };
@@ -28,12 +28,12 @@ const DonutChart = () => {
     radius:70,
   };
 
-  const legendColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'];
+  const legendColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50','#F74304','#C704F7'];
 
   return (
-    <div className='block'>
-        <h2 className="md:text-xl font-bold text-center my-4 underline">Across platforms</h2>
-        <div className="lg:flex lg:flex-row">
+    <div className= 'block'>
+      <h2 className="md:text-xl font-bold text-center my-4 underline">Across platforms</h2>
+        <div className="lg:flex lg:flex-row justify-center">
           <div className="">
             <Doughnut data={data} options={options} />
           </div>
@@ -48,7 +48,7 @@ const DonutChart = () => {
               </div>
             ))}
           </div>
-       </div>
+        </div>
     </div>   
   );
 };

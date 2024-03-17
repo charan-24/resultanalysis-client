@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext, useState }  from "react";
 import { FcGoogle} from "react-icons/fc";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 function Login() {
+    const navigate = useNavigate();
     const [showpwd,setShowpd] = useState("Show password");
     const [pwdtype,setPwdtype] = useState(1);
+    const [wrongUser,setWrongUser] = useState(0);
+    const [wrongPass,setWrongPass] = useState(0);
+    const {setAuth} = useAuth();
+
     const handlePassword = ()=>{
         if(pwdtype){
             setShowpd("Hide password");
@@ -15,6 +21,38 @@ function Login() {
         }
         setPwdtype(!pwdtype);
     }
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const username = e.target.elements.username.value;
+        const password = e.target.elements.password.value;
+        const userData = {
+            username,
+            password
+        }
+        // console.log(userData);
+        await axios.post('http://localhost:5000/login',userData)
+                    .then(res=>{
+                        setAuth({"rollno":username,"role":res.data.role,"accessToken":res.data.accessToken,"fullname":res.data.fullname});
+                        console.log(res.data);
+                        if(res.data.role==="Student"){
+                            navigate(`/my-profile/`+username);
+                        }
+                        else{
+                            navigate('/dashboard');
+                        }
+                    })
+                    .catch(err=>{
+                        if(err.response.data.message==="username"){
+                            setWrongUser(!wrongUser);
+                        }
+                        else if(err.response.data.message==="password"){
+                            setWrongPass(!wrongPass);
+                        }
+                        console.log(err);
+                    });
+    }
+
     return(
         <div>
             <div className="md:grid md:grid-cols-2 relative">
@@ -41,16 +79,18 @@ function Login() {
                                 {<FcGoogle className="inline" />} Sign in with google
                             </button>
                         </div>
-                        <form className="text-start bg-white ring-slate-50" action="http://localhost:5000/" method="post">   
-                            <label htmlFor="username" className="block text-[16px] mt-4 font-lato">Email/Username</label>                    
-                            <input id="username" type="text" name="username" className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/>  
+                        <form className="text-start bg-white ring-slate-50" onSubmit={handleLogin}>   
+                            <label htmlFor="username" className="block text-[16px] mt-4 font-lato">Email/Username</label>
+                            <p className={wrongUser?"text-red-600 font-bold":"hidden"}>email/username not found</p>                    
+                            <input id="username" type="text" name="username" onChange={()=>{setWrongUser(0)}} className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/>  
                             <label htmlFor="password" className="block text-[16px] font-lato">Password</label>                    
-                            <input id="password" type={pwdtype?"password":"text"} name="password" className="mb-4 h-[43px] bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"></input>  
+                            <p className={wrongPass?"text-red-600 font-bold":"hidden"}>wrong password</p>
+                            <input id="password" type={pwdtype?"password":"text"} name="password" onChange={()=>{setWrongPass(0)}} className="mb-4 h-[43px] bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"></input>  
                             <input type="checkbox" id="showpassword" name="showpassword" className="mt-4 mx-2" onClick={handlePassword}></input>
                             <label htmlFor="showpassword">{showpwd}</label>
                             <a href="/" className="block text-blue-400 m-4 font-lato">Forgot password?</a>     
-                            <button className="block bg-[#778379] text-white w-3/4 h-[43px] rounded-md mt-2 mx-auto m-4 font-montserrat font-bold">Sign in</button> 
-                            <p className="text-center text-[#858585] mt-2 font-lato">Don't have an account? <Link to="/register" className="text-blue-400 m-4 font-lato">Register here</Link></p>             
+                            <button className="block bg-[#778379] text-white w-3/4 h-[43px] rounded-md mt-2 mx-auto m-4 font-montserrat font-bold" type="submit">Sign in</button> 
+                            {/* <p className="text-center text-[#858585] mt-2 font-lato">Don't have an account? <Link to="/register" className="text-blue-400 m-4 font-lato">Register here</Link></p>              */}
                         </form>
                     </div>
             </div>       

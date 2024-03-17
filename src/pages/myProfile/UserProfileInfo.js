@@ -8,12 +8,12 @@ const UserProfileInfo = ({user}) => {
         alt='Profile Picture'
         className="block mx-auto"
       />
-      <h2 className="text-2xl font-bold">{user.name}</h2>
-      <p className="text-gray-500">({user.username})</p>
-      <p className="text-gray-500">Location: {user.location}</p>
+      <h2 className="text-2xl font-bold">{user.fullname}</h2>
+      <p className="text-gray-500">({user.rollno})</p>
+      <p className="text-gray-500">Location: IN</p>
       <p className="mt-4">
-        <span className="font-bold">Overall score:</span> {user.overallScore} <br />
-        <span className="font-bold">Global rank:</span> {user.globalRank}
+        <span className="font-bold">Overall score:</span> {user.total} <br />
+        <span className="font-bold">Global rank:</span> 9999
       </p>
     </div>
   );

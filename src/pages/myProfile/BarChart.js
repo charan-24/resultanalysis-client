@@ -13,7 +13,7 @@ const BarChart = () => {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(75,192,192,0.6)',
         hoverBorderColor: 'rgba(75,192,192,1)',
-        data: [80, 90, 75, 85, 92, 88, 78],
+        data: [80, 90, 75, 85, 92],
       },
     ],
   };

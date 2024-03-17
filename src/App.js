@@ -7,25 +7,37 @@ import MyAccount from './pages/myAccount/myAccount';
 import Contactus from './layouts/contactus';
 import Dashboard from './pages/dashboard/dashboard';
 import Register from './pages/register/register';
+import RequireAuth from './layouts/RequireAuth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-//import { Switch } from 'react-router';
+import useAuth from './hooks/useAuth';
+
 
 function App() {
 
+  const { auth } = useAuth();
+
   return (
     <div >
-      
       <Router>
         {/* <Navbar /> */}
         <Routes>
+            {/* //public routes */}
             <Route path='/' element={<Login />}/>
             <Route path='/register' element={<Register />}/>
-            <Route path='/my-profile' element={<MyProfile />}/>
-            <Route path='/coding-profiles' element={<CodingProfiles/>}/>
-            <Route path='/leaderboard' element={<LeaderBoard />}/>
-            <Route path='/my-account' element={<MyAccount />}/>
-            <Route path='/contact-us' element={<Contactus />}/>
+
+            {/* Only Students */}
+            {/* <Route element={<RequireAuth />}> */}
+              <Route path='/my-profile/:rollno' element={<MyProfile />}/>
+              <Route path='/coding-profiles' element={<CodingProfiles/>}/>
+              <Route path='/leaderboard/:batchname' element={<LeaderBoard />} />
+              <Route path='/my-account' element={<MyAccount />}/>
+              <Route path='/contact-us' element={<Contactus />} />
+            {/* </Route> */}
+            {/* Only Admin */}
             <Route path='/dashboard' element={<Dashboard />} />
+            {/* <Route element={<RequireAuth />}>
+              <Route path='/dashboard' element={<Dashboard />} />
+            </Route> */}
         </Routes>       
       </Router>
     </div>

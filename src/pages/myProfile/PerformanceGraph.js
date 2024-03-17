@@ -1,30 +1,23 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import DonutChart from './DonutChart';
 import 'chart.js/auto'; 
 
-const LineGraph = () => {
-  
+const PerformanceGraph = ({totalScores}) => {
+
   const data = {
     labels: [
       'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10',
       'Day 11', 'Day 12', 'Day 13', 'Day 14', 'Day 15', 'Day 16', 'Day 17', 'Day 18', 'Day 19', 'Day 20',
-      'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'
-      
+      'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'    
     ],
+    
     datasets: [
       {
         label: 'Monthly Performance',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
-        pointRadius: 5,
-        pointBackgroundColor: 'rgba(75,192,192,1)',
-        pointBorderColor: '#fff',
-        pointHoverRadius: 8,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: '#fff',
+        pointBackgroundColor:"orange",        
+        borderColor: 'orange',
         data: [
           300, 320, 350, 380, 400, 410, 420, 430, 440, 450,
           450, 430, 420, 480, 500,510, 520, 530, 540, 550,         
@@ -44,7 +37,7 @@ const LineGraph = () => {
     },
     plugins: {
       legend:{
-          display:false
+          display:true
       }
     },
     scales: {
@@ -65,5 +58,5 @@ const LineGraph = () => {
   );
 };
 
-export default LineGraph;
+export default PerformanceGraph;
 
