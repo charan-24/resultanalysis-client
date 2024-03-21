@@ -46,7 +46,7 @@ const AddBatch = ({display, handleShowBatchModal, handleBatches}) =>{
 
     const fetchScores = async (batchData) =>{
         console.log(batchData);
-        await axios.post('http://localhost:5000/score/fetchScores',batchData,{
+        await axios.post('http://localhost:5000/score/fetchNewBatchScores',batchData,{
             headers: {
                 'Content-Type': 'application/json'
                 // Add other headers as needed

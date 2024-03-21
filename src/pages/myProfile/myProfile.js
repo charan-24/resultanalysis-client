@@ -3,6 +3,7 @@ import PerformanceGraph from './PerformanceGraph';
 import RatingsChart from './RatingsChart';
 import DonutChart from './DonutChart';
 import UserInfo from './UserProfileInfo';
+import BarChart from './BarChart';
 import Navbar from '../../layouts/navbar';
 import useAuth from '../../hooks/useAuth';
 import { useParams } from 'react-router-dom';
@@ -13,6 +14,8 @@ const MyProfile = () => {
   const [donutData,setDonutData] = useState([]);
   const [ratingsData,setRatingsData] = useState([]);
   const [totalScoreData,setTotalScoreData] = useState([]);
+  const [problems,setProblems] = useState([]);
+  const [contests,setContest] = useState([]);
   const { rollno } = useParams(); 
   const {auth} = useAuth();
   
@@ -23,14 +26,17 @@ const MyProfile = () => {
   const getScores = async () => {
     await axios.get('http://localhost:5000/score/getIndScore/'+roll)
                                 .then(res=>{
-                                    // console.log(res.data);
+                                    console.log(res.data);
                                     let temp = Object.values(res.data.scoreObj);
                                     // console.log(temp);
                                     setDonutData([...temp.slice(0,6)]);
                                     setRatingsData([...temp.slice(6,9)]);
                                     setTotalScoreData([res.data.total]);
+                                    setProblems([...temp.slice(9,15)]);
+                                    setContest([...temp.slice(15,21)]);
                                     setUserData({
-                                      fullname: res.data.fullname,
+                                      fullname: res.data.fullname.replace(/(\w)(\w*)/g,
+                                      function(g0,g1,g2){return g1.toUpperCase() + g2.toLowerCase();}),
                                       rollno: res.data.rollno,
                                       total: res.data.total
                                     });                                                    
@@ -55,7 +61,10 @@ const MyProfile = () => {
             <div className='block'>
               <DonutChart donutData={donutData}/>
             </div>  
-            <hr className='my-4'/>        
+            <hr className='my-4'/>
+            <div className='lg:w-1/2 mx-auto'>
+              <BarChart problems={problems} contests={contests}/>
+            </div>        
             <div className='w-full lg:w-3/4 mx-auto'> 
               <RatingsChart ratings={ratingsData}/>
             </div>

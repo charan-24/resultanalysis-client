@@ -1,35 +1,43 @@
 export const Headings = [
     {
         id:"sno",
-        title:"s.no"
+        title:"S No"
     },
     {
         id:"rollno",
-        title:"Rollno"
+        title:"Roll No"
     },
     {
         id:"fullname",
         title:"Name"
     },
     {
+        id:"lastlogin",
+        title:"Last Login"
+    },
+    {
+        id:"lastupdated",
+        title:"Last Updated"
+    },
+    {
         id:"hacker",
-        title:"HackerRank"
+        title:"Hacker Rank"
     },
     {
         id:"leet",
-        title:"LeetCode"
+        title:"Leet Code"
     },
     {
         id:"chef",
-        title:"CodeChef"
+        title:"Code Chef"
     },
     {
         id:"forces",
-        title:"CodeForces"
+        title:"Code Forces"
     },
     {
         id:"interviewbit",
-        title:"InterviewBit"
+        title:"Interview Bit"
     },
     {
         id:"spoj",

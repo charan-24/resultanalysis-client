@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from "react";
+import React, { useState,useEffect} from "react";
 import Navbar from '../../layouts/navbar';
 import { IoMdMore } from "react-icons/io";
 import { BiUpArrowAlt } from "react-icons/bi";
@@ -7,6 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import { Link, useParams } from "react-router-dom";
 import './leaderboard.css';
 import axios from 'axios';
+import * as XLSX from 'xlsx';
+import { saveAS, saveAs } from 'file-saver';
 
 function LeaderBoard (){
     const [Users,setUsers] = useState([]);
@@ -16,21 +18,30 @@ function LeaderBoard (){
     const [showDel,setShowDel] = useState(0);
     const [userid,setUserid] = useState(null);
     const [delid,setDelid] = useState(null);
+    const [reportData,setReportData] = useState({});
     const [showList,setShowList] = useState(0);
 
     const {auth} = useAuth();
     const {batchname} = useParams();
     const role = auth.role;
+    const rollno = auth.rollno;
 
     const getScores = async () => {
         const arr = [];
             await axios.get('http://localhost:5000/score/getScores/'+batchname)
-                                    .then(res=>{
+                                    .then(res=>{                                    
                                         res.data.forEach((item,index)=>{
+                                            const lastlogin = item.lastlogin?.toLocaleString().slice(0,10) ?? "";
+                                            const lastUpdated = item.lastUpdated?.toLocaleString().slice(0,10) ?? "";
+                                            // const logintime = "";
                                             arr.push({
                                                 sno:index+1,
                                                 rollno: item.rollno,
-                                                fullname: item.fullname,
+                                                fullname: item.fullname?.replace(/(\w)(\w*)/g,
+                                                            function(g0,g1,g2){return g1.toUpperCase() + g2.toLowerCase();}),
+                                                lastlogin: lastlogin,
+                                                lastUpdated: lastUpdated,
+                                                isActive: item.isActive,
                                                 hacker: item.hacker,
                                                 leet: item.leet,
                                                 chef: item.chef,
@@ -44,12 +55,25 @@ function LeaderBoard (){
                                         for(let i=0;i<arr.length;i++){
                                             arr[i].sno = i+1;
                                         }
+                                        setReportData(res.data);
                                         setUsers(arr);
                                     })
                                     .catch(err=>{
                                         console.error(err);
                                     })
     }
+
+    const exportToExcel = ()=> {
+        const worksheet = XLSX.utils.json_to_sheet(reportData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook,worksheet, "Sheet1");
+        
+    // Buffer to store the generated Excel file
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    
+    saveAs(blob, `${batchname}_Report.xlsx`);
+    };
 
     const handleSort = (e)=>{
         const arr = Users.slice();
@@ -165,7 +189,6 @@ function LeaderBoard (){
         await axios.delete('http://localhost:5000/batch/deleteUser/'+batchname+'/'+rollno)
                     .then(res=>{
                         getScores();
-                        // console.log("deleted");
                     })
                     .catch(err=>{
                         console.error(err);
@@ -184,9 +207,9 @@ function LeaderBoard (){
                     <thead>
                         <tr className="thead-row">
                             {Headings.map((item)=>(
-                                <th key={item.id}>
+                                <th className={(item.id==="lastlogin" && role==="Student" && "hidden") || (item.id==="lastupdated" && role==="Student" && "hidden")} key={item.id}>
                                     <div className="flex flex-row justify-evenly">
-                                        <h2 className="inline">{item.title}</h2>
+                                        <h2 className={"inline"}>{item.title}</h2>
                                         <BiUpArrowAlt id={item.id} onClick={handleSort} className="" style={headId===item.id ? style : {} }/>
                                     </div>
                                 </th>
@@ -195,11 +218,11 @@ function LeaderBoard (){
                     </thead>
                     <tbody>
                         {Users.map((user,index)=>(
-                            <tr key={user.rollno} className={index%2!==0?"tbody-row bg-[#f5f5f5]":"tbody-row"}>
+                            <tr key={user.rollno} className={user.rollno===rollno?"tbody-row bg-green-200":index%2!==0?`tbody-row bg-[#f5f5f5]` :"tbody-row"}>
                                 <td>{user.sno}</td>
-                                <td id={user.rollno} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                    <div className="relative">
-                                        <p className="inline">{user.rollno}</p>
+                                <td className={!user.isActive && "bg-red-300"} id={user.rollno} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                                    <div className={"relative"}>
+                                        <p className={"inline"}>{user.rollno}</p>
                                         <div className={role===`Student`?"hidden":"inline"}>
                                             <IoMdMore id={user.rollno} onClick={handleList} className={userid===user.rollno?(showDel ?"inline float-right":"hidden"):"hidden"}/>
                                             <div className={ (delid===user.rollno) ? (showList ? "absolute left-full top-5  w-[100px]":"hidden"):"hidden"}>
@@ -211,6 +234,8 @@ function LeaderBoard (){
                                     </div>
                                 </td>
                                 <td><Link to={`/my-profile/`+user.rollno}>{user.fullname}</Link></td>
+                                <td className={role === "Student" && "hidden"}>{user.lastlogin}</td>
+                                <td className={role === "Student" && "hidden"}>{user.lastUpdated}</td>
                                 <td>{user.hacker}</td>
                                 <td>{user.leet}</td>
                                 <td>{user.chef}</td>
@@ -222,9 +247,9 @@ function LeaderBoard (){
                         ))}                    
                     </tbody>
                 </table>
-                {/* <button className="inline float-right bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mb-1">
-                    Add a User
-                </button> */}
+                <button className={role==='Admin'?"block mx-auto bg-amber-300 rounded-md mt-4 px-3 py-1 md:px-6 md:py-2 mb-1":"hidden"} onClick={exportToExcel}>
+                    Download Batch Report
+                </button>
             </div>
             {/* <Contactus /> */}
         </div>

@@ -9,6 +9,7 @@ function MyAccount(){
     const [codingProfiles,setCodingProfiles] = useState([]);
     const [personals, setPersonals] = useState([]);
     const [newHandle, setNewHandle] = useState(null);
+    const [newPersonalDetail, setNewPersonalDetail] = useState(null);
     const {auth} = useAuth();
     const rollno = auth.rollno;
 
@@ -85,6 +86,11 @@ function MyAccount(){
         setNewHandle(e.target.value);
     }
 
+    const handleDetailsChange = async (e) => {
+        e.preventDefault();
+        setNewPersonalDetail(e.target.value);
+    }
+
     const changeHandle = async (e) => {
         e.preventDefault();
         if(newHandle===null){
@@ -108,6 +114,25 @@ function MyAccount(){
                     });
     }
 
+    const changePersonalDetail = async (e)=>{
+        e.preventDefault();
+        let label = e.target.id;
+        label=label.toLowerCase().split('-');
+        const key = label[0]+label[1];
+        const dataObj = {
+            "rollno": rollno,
+            "key": key.toLowerCase(),
+            "value": newPersonalDetail
+        }
+        await axios.post('http://localhost:5000/user/changeAPersonalDetail',dataObj)
+                    .then((res)=>{
+                        alert(res.data.message);
+                    })
+                    .catch((err)=>{
+                        console.log("Not updated");
+                    })
+    }
+
     useEffect(()=>{
         getUserDetails();
     },[]);
@@ -125,9 +150,9 @@ function MyAccount(){
                     {personals.map((personal)=>(
                         <div key={personal.id}>
                             <label htmlFor={personal.label} className="block text-[12px] text-gray-500 font-semibold mt-2">{personal.label}</label>
-                            <input id={personal.label} type="text" defaultValue={personal.input} className="inline mt-2 focus:outline-none" disabled></input>
-                            <button className="inline float-right bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mb-1">
-                                update
+                            <input id={personal.label} type="text" defaultValue={personal.input} className="inline w-2/3 mt-2 focus:outline-none" disabled={personal.label!=="E-mail"} onChange={handleDetailsChange}></input>
+                            <button className="inline float-right bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mb-1" id={personal.label} onClick={changePersonalDetail}>
+                                Update
                             </button>
                             <hr className={`border-1 border-black w-full`}/>                   
                         </div>
@@ -140,9 +165,9 @@ function MyAccount(){
                     {codingProfiles.map((platform)=>(
                         <div key={platform.id}>
                             <label htmlFor={platform.label} className="block text-[12px] text-gray-500 font-semibold mt-2">{platform.label}</label>
-                            <input id={platform.label} type="text" defaultValue={platform.input} className="inline mt-2 focus:outline-none" onChange={handleInputChange}></input>
+                            <input id={platform.label} type="text" defaultValue={platform.input} className="inline w-2/3 mt-2 focus:outline-none" onChange={handleInputChange}></input>
                             <button className="inline float-right bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mb-1" id={platform.label} onClick={changeHandle}>
-                                update
+                                Update
                             </button>
                             <hr className={`border-1 border-black w-full`}/>                   
                         </div>

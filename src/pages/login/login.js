@@ -33,7 +33,15 @@ function Login() {
         // console.log(userData);
         await axios.post('http://localhost:5000/login',userData)
                     .then(res=>{
-                        setAuth({"rollno":username,"role":res.data.role,"accessToken":res.data.accessToken,"fullname":res.data.fullname});
+                        sessionStorage.setItem("rollno",username);
+                        sessionStorage.setItem("fullname",res.data.fullname);
+                        sessionStorage.setItem("role",res.data.role);
+                        sessionStorage.setItem("accessToken",res.data.accessToken);
+                        setAuth({"rollno":sessionStorage.getItem("rollno"),
+                                "fullname":sessionStorage.getItem("fullname"),
+                                "role":sessionStorage.getItem("role"),
+                                "accessToken":sessionStorage.getItem("accessToken"),
+                        });
                         console.log(res.data);
                         if(res.data.role==="Student"){
                             navigate(`/my-profile/`+username);
@@ -62,7 +70,6 @@ function Login() {
                     <h1 className="block text-center text-3xl md:mt-16">WELCOME BACK</h1>
                     <div className="flex justify-center item-center">
                         <img src= {process.env.PUBLIC_URL+"images/coding.gif"} className="absolute top-1/4 w-3/4" alt="coding GIF" />
-                        {/* {process.env.PUBLIC_URL} */}
                     </div>                   
                 </div>
                 <div className="md:hidden flex flex-row justify-between font-extrabold gap-10 text-black">
@@ -74,11 +81,11 @@ function Login() {
                     <h1 className="text-4xl text-center md:text-left mt-10 md:mt-10 m-4 font-bold ml-4">Sign in</h1>
                     <h2 className="text-xs mt-2 text-center md:text-left m-4 font-lato">Sign into your account</h2>
                     <div className="">
-                        <div className="block m-4">
+                        {/* <div className="block m-4">
                             <button className="p-2 bg-white text-[#858585] font-montserrat">
                                 {<FcGoogle className="inline" />} Sign in with google
                             </button>
-                        </div>
+                        </div> */}
                         <form className="text-start bg-white ring-slate-50" onSubmit={handleLogin}>   
                             <label htmlFor="username" className="block text-[16px] mt-4 font-lato">Email/Username</label>
                             <p className={wrongUser?"text-red-600 font-bold":"hidden"}>email/username not found</p>                    

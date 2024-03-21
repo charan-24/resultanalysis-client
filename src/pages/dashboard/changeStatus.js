@@ -30,6 +30,7 @@ const ChangeStatus = ({batchname, display, handleChangeStatusModal, handleBatche
             console.log(err);
         })
         handleBatches();
+        handleChangeStatusModal();
     }
 
     const handleOption = (e)=>{
@@ -41,15 +42,15 @@ const ChangeStatus = ({batchname, display, handleChangeStatusModal, handleBatche
         <div className={`${display?"fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center":"hidden"}`} id="addbatch">
                 <form className="w-1/3 text-start bg-white ring-slate-50 border-2 border-black p-4"> 
                     <RxCross1 className="float-right text-2xl" onClick={handleChangeStatusModal}/>  
-                    <label htmlFor="batchname" className="inline text-[16px] mt-4 font-lato" >change status to</label>                    
+                    <label htmlFor="batchname" className="inline text-[16px] mt-4 font-lato" >Change status to</label>                    
                     {/* <input id="batchname" type="text" name="batchname" placeholder="Enter your batchname..."className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/> */}
                     <select className='ml-3 inline rounded-md bg-gray-300 focus:outline-none' onChange={handleOption}>
-                        <option value="active">active</option>
-                        <option value="hold">hold</option>
-                        <option value="completed">completed</option>
+                        <option value="Active">Active</option>
+                        <option value="Hold">Hold</option>
+                        <option value="Completed">Completed</option>
                     </select>
                     <button className={"block mx-auto bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mt-5"} type="submit" onClick={handleChange}>
-                        change
+                        Change
                     </button>
                 </form>
         </div>

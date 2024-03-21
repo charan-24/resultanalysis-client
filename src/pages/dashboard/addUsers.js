@@ -13,7 +13,7 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
         setSelectedFile(e.target.files[0]);
     }
 
-    const handleForm = async (e)=>{
+    const handleForm = async (e) => {
         e.preventDefault();
         if(!selectedFile){
             const fullname = e.target.elements.fullname.value;
@@ -34,7 +34,7 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
                         "password":password
                     }]
             })
-            alert("please select a file");
+            // alert("please select a file");
             return;
         }
         const reader = new FileReader();
@@ -56,28 +56,6 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
                 });
             };
         reader.readAsArrayBuffer(selectedFile);
-        // else{
-        //     const reader = new FileReader();
-        //     reader.onload = (e) => {
-        //         const data = new Uint8Array(e.target.result);
-        //         const workbook = XLSX.read(data, { type: 'arra y' });
-
-        //         // Assuming the first sheet is the one of interest
-        //         const sheetName = workbook.SheetNames[0];
-        //         const sheet = workbook.Sheets[sheetName];
-
-        //         // Convert sheet data to JSON
-        //         const jsonData = XLSX.utils.sheet_to_json(sheet);
-
-        //         // Store the data in state
-        //         setExcelData({
-        //             "batchname":batchname,
-        //             "users":jsonData
-        //         });
-        //     };
-        //     reader.readAsArrayBuffer(selectedFile);
-        //     return;
-        // }
     }
 
     const fetchNewScores = async (batchData)=>{
@@ -128,7 +106,7 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
                     <p className="text-center">OR</p>
                     <hr/>
                     <div>
-                        <h1 className="underline">Enter Student Details</h1>
+                        {/* <h1 className="underline">Enter Student Details</h1>
                         <label htmlFor="fullname" className="block text-[16px] mt-4 font-lato">Name</label>                    
                         <input id="fullname" type="text" name="fullname" className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato" />
                         <label htmlFor="rollno" className="block text-[16px] mt-4 font-lato">Roll No.</label>                    
@@ -136,7 +114,7 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
                         <label htmlFor="email" className="block text-[16px] mt-4 font-lato">Email</label>                    
                         <input id="email" type="text" name="email" className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato" />
                         <label htmlFor="password" className="block text-[16px] mt-4 font-lato">Password</label>                    
-                        <input id="password" type="password" name="password" defaultValue="xyz" className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/>
+                        <input id="password" type="password" name="password" defaultValue="xyz" className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/> */}
                         <button className="block mx-auto bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mt-5" type="submit">
                             Submit
                         </button>

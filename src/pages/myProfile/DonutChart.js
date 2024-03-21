@@ -32,7 +32,7 @@ const DonutChart = ({donutData}) => {
 
   return (
     <div className= 'block'>
-      <h2 className="md:text-xl font-bold text-center my-4 underline">Across platforms</h2>
+      <h2 className="md:text-xl font-bold text-center my-4 underline">Scores Across Platforms</h2>
         <div className="lg:flex lg:flex-row justify-center">
           <div className="">
             <Doughnut data={data} options={options} />
