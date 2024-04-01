@@ -1,5 +1,6 @@
 import './App.css';
-import Login from './pages/login/login';
+import UserLogin from './pages/login/userLogin';
+import AdminLogin from './pages/login/adminLogin';
 import MyProfile from './pages/myProfile/myProfile';
 import CodingProfiles from './pages/register/codingProfiles';
 import LeaderBoard from './pages/leaderboard/leaderboard';
@@ -37,7 +38,8 @@ function App() {
         {/* <Navbar /> */}
         <Routes>
             {/* //public routes */}
-            <Route path='/' element={<Login />}/>
+            <Route path='/' element={<UserLogin />}/>
+            <Route path='/adminLogin' element={<AdminLogin />}/>
             <Route path='/register' element={<Register />}/>
 
             {/* Only Students */}

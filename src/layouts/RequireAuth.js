@@ -10,6 +10,8 @@ const RequireAuth = () =>{
     return(
         auth.rollno
         ?<Outlet />
+        :auth.username
+        ?<Outlet />
         :<Navigate to="/" state={{from: location}} replace/>
     );
 };

@@ -1,10 +1,9 @@
 import React, { useContext, useState }  from "react";
-import { FcGoogle} from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
-function Login() {
+function AdminLogin() {
     const navigate = useNavigate();
     const [showpwd,setShowpd] = useState("Show password");
     const [pwdtype,setPwdtype] = useState(1);
@@ -31,24 +30,18 @@ function Login() {
             password
         }
         // console.log(userData);
-        await axios.post('http://localhost:5000/login',userData)
+        await axios.post('http://localhost:5000/login/adminLogin',userData)
                     .then(res=>{
-                        sessionStorage.setItem("rollno",username);
-                        sessionStorage.setItem("fullname",res.data.fullname);
+                        sessionStorage.setItem("username",username);
+                        // sessionStorage.setItem("fullname",res.data.fullname);
                         sessionStorage.setItem("role",res.data.role);
                         sessionStorage.setItem("accessToken",res.data.accessToken);
-                        setAuth({"rollno":sessionStorage.getItem("rollno"),
-                                "fullname":sessionStorage.getItem("fullname"),
+                        setAuth({"username":sessionStorage.getItem("username"),
                                 "role":sessionStorage.getItem("role"),
                                 "accessToken":sessionStorage.getItem("accessToken"),
                         });
                         console.log(res.data);
-                        if(res.data.role==="Student"){
-                            navigate(`/my-profile/`+username);
-                        }
-                        else{
-                            navigate('/dashboard');
-                        }
+                        navigate('/dashboard');
                     })
                     .catch(err=>{
                         if(err.response.data.message==="username"){
@@ -78,14 +71,9 @@ function Login() {
                 </div>
             </div>         
             <div className="mx-auto lg:mt-[6rem] xl:w-3/4 bg-[#F8FAFF]">
-                    <h1 className="text-4xl text-center md:text-left mt-10 md:mt-10 m-4 font-bold ml-4">Sign in</h1>
+                    <h1 className="text-4xl text-center md:text-left mt-10 md:mt-10 m-4 font-bold ml-4">Admin Login</h1>
                     <h2 className="text-xs mt-2 text-center md:text-left m-4 font-lato">Sign into your account</h2>
                     <div className="">
-                        {/* <div className="block m-4">
-                            <button className="p-2 bg-white text-[#858585] font-montserrat">
-                                {<FcGoogle className="inline" />} Sign in with google
-                            </button>
-                        </div> */}
                         <form className="text-start bg-white ring-slate-50" onSubmit={handleLogin}>   
                             <label htmlFor="username" className="block text-[16px] mt-4 font-lato">Email/Username</label>
                             <p className={wrongUser?"text-red-600 font-bold":"hidden"}>email/username not found</p>                    
@@ -96,6 +84,7 @@ function Login() {
                             <input type="checkbox" id="showpassword" name="showpassword" className="mt-4 mx-2" onClick={handlePassword}></input>
                             <label htmlFor="showpassword">{showpwd}</label>
                             <a href="/" className="block text-blue-400 m-4 font-lato">Forgot password?</a>     
+                            <Link to='/'>Are you a Student? Login Here</Link>
                             <button className="block bg-[#778379] text-white w-3/4 h-[43px] rounded-md mt-2 mx-auto m-4 font-montserrat font-bold" type="submit">Sign in</button> 
                             {/* <p className="text-center text-[#858585] mt-2 font-lato">Don't have an account? <Link to="/register" className="text-blue-400 m-4 font-lato">Register here</Link></p>              */}
                         </form>
@@ -107,4 +96,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default AdminLogin;
