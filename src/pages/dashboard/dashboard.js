@@ -170,16 +170,16 @@ function Dashboard() {
             {/* <Fragment></Fragment> */}
             <div className="flex flex-row gap-20 text-[20px] ml-10">
                 <div className="text-[20px]">
-                    <input id="Completed" name="Completed" type="checkbox" onClick={handleCheckBox} />
-                    <label htmlFor="Completed" className="ml-2">Completed</label>
+                    <input id="completed" name="completed" type="checkbox" onClick={handleCheckBox} />
+                    <label htmlFor="completed" className="ml-2">Completed</label>
                 </div>
                 <div>
-                    <input id="Active" name="Active" type="checkbox" onClick={handleCheckBox} />
-                    <label htmlFor="Active" className="ml-2">Active</label>
+                    <input id="active" name="active" type="checkbox" onClick={handleCheckBox} />
+                    <label htmlFor="active" className="ml-2">Active</label>
                 </div>
                 <div>
-                    <input id="Hold" name="Hold" type="checkbox" onClick={handleCheckBox} />
-                    <label htmlFor="Hold" className="ml-2">Hold</label>
+                    <input id="hold" name="hold" type="checkbox" onClick={handleCheckBox} />
+                    <label htmlFor="hold" className="ml-2">Hold</label>
                 </div>
             </div>
             <div className={`flex flex-row flex-wrap md:justify-around lg:justify-normal`}>

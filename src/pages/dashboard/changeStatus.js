@@ -45,9 +45,9 @@ const ChangeStatus = ({batchname, display, handleChangeStatusModal, handleBatche
                     <label htmlFor="batchname" className="inline text-[16px] mt-4 font-lato" >Change status to</label>                    
                     {/* <input id="batchname" type="text" name="batchname" placeholder="Enter your batchname..."className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/> */}
                     <select className='ml-3 inline rounded-md bg-gray-300 focus:outline-none' onChange={handleOption}>
-                        <option value="Active">Active</option>
-                        <option value="Hold">Hold</option>
-                        <option value="Completed">Completed</option>
+                        <option value="active">Active</option>
+                        <option value="hold">Hold</option>
+                        <option value="completed">Completed</option>
                     </select>
                     <button className={"block mx-auto bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mt-5"} type="submit" onClick={handleChange}>
                         Change
