@@ -70,9 +70,9 @@ const Navbar = () => {
                 My Profile
               </Link>
             </p>
-            {/* <Link to="/leaderboard/:batchname" className="block px-4 py-2 hover:bg-gray-200" onClick={handleOptionClick}>
+            <Link to="/unileaderboard" className="block px-4 py-2 hover:bg-gray-200" onClick={handleOptionClick}>
               LeaderBoard
-            </Link> */}
+            </Link>
             <p>
               <Link to="/my-account" className="block px-4 py-2 hover:bg-gray-200" onClick={handleOptionClick}>
                 My Account

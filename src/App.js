@@ -4,6 +4,7 @@ import AdminLogin from './pages/login/adminLogin';
 import MyProfile from './pages/myProfile/myProfile';
 import CodingProfiles from './pages/register/codingProfiles';
 import LeaderBoard from './pages/leaderboard/leaderboard';
+import Unileaderboard from './pages/leaderboard/unileaderboard';
 import MyAccount from './pages/myAccount/myAccount';
 import Contactus from './layouts/contactus';
 import Dashboard from './pages/dashboard/dashboard';
@@ -41,6 +42,7 @@ function App() {
             <Route path='/' element={<UserLogin />}/>
             <Route path='/adminLogin' element={<AdminLogin />}/>
             <Route path='/register' element={<Register />}/>
+            <Route path='/unileaderboard' element={<Unileaderboard />}/>
 
             {/* Only Students */}
             <Route element={<RequireAuth />}>
