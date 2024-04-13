@@ -19,7 +19,7 @@ function App() {
 
   const {setAuth} = useAuth();
 
-  const handleDataPersistance = ()=> {
+  const handleDataPersistance = () => {
     if(sessionStorage.length>=1){
       setAuth({"rollno":sessionStorage.getItem("rollno"),
                                 "fullname":sessionStorage.getItem("fullname"),

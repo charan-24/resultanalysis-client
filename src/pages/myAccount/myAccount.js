@@ -10,6 +10,9 @@ function MyAccount(){
     const [personals, setPersonals] = useState([]);
     const [newHandle, setNewHandle] = useState(null);
     const [newPersonalDetail, setNewPersonalDetail] = useState(null);
+    const [newpwd, setNewpwd] = useState(null);
+    const [cnfpwd, setCnfpwd] = useState(null);
+    const [pwdmatch, setPwdmatch] = useState(0);
     const {auth} = useAuth();
     const rollno = auth.rollno;
 
@@ -40,7 +43,7 @@ function MyAccount(){
                 id:3,
                 label:"E-mail",
                 input:userDetails.email
-            }
+            },
         ];
 
         const codingProfile = [
@@ -91,6 +94,42 @@ function MyAccount(){
         setNewPersonalDetail(e.target.value);
     }
 
+    const handlePassword = async (e)=>{
+        e.preventDefault();
+        const id = e.target.id;
+        const val = e.target.value;
+        if(id=="newpwd"){
+            setNewpwd(val);
+        }
+        else if(id == "cnfpwd"){
+            setCnfpwd(val);
+            if(newpwd != val){
+                setPwdmatch(-1);
+            }
+            else{
+                setPwdmatch(1);
+            }
+        }
+    }
+
+    const changePassword = async (e)=>{
+        e.preventDefault();
+        if(newpwd == cnfpwd){
+            const dataObj = {
+                "rollno": rollno,
+                "key": "password",
+                "value": cnfpwd
+            }
+            await axios.post('http://localhost:5000/user/changeAPersonalDetail',dataObj)
+                        .then((res)=>{
+                            alert(res.data.message);
+                        })
+                        .catch((err)=>{
+                            console.log("Not updated");
+            })
+        }
+    }
+
     const changeHandle = async (e) => {
         e.preventDefault();
         if(newHandle===null){
@@ -117,8 +156,14 @@ function MyAccount(){
     const changePersonalDetail = async (e)=>{
         e.preventDefault();
         let label = e.target.id;
-        label=label.toLowerCase().split('-');
-        const key = label[0]+label[1];
+        let key;
+        if(label == "E-mail"){
+            label=label.toLowerCase().split('-');
+            key = label[0]+label[1];
+        }
+        else if(label == "confirm new password"){
+            key = "password";
+        }
         const dataObj = {
             "rollno": rollno,
             "key": key.toLowerCase(),
@@ -132,6 +177,9 @@ function MyAccount(){
                         console.log("Not updated");
                     })
     }
+    const clickOutside = async (e)=>{
+        setPwdmatch(0);
+    }
 
     useEffect(()=>{
         getUserDetails();
@@ -139,12 +187,12 @@ function MyAccount(){
 
     useEffect(()=>{
         copyUserdetails();
-    },[userDetails]);
+    },[userDetails,pwdmatch]);
     
     return(
-        <div>
+        <div >
             <Navbar />
-            <div>
+            <div onClick={clickOutside}>
                 <h1 className="text-center font-bold md:mt-4 underline">Personal Details</h1>
                 <form className="w-3/4 md:w-2/5 mx-auto">
                     {personals.map((personal)=>(
@@ -156,7 +204,22 @@ function MyAccount(){
                             </button>
                             <hr className={`border-1 border-black w-full`}/>                   
                         </div>
-                    ))}                     
+                    ))}
+                    <label htmlFor="newpwd" className="block text-[12px] text-gray-500 font-semibold mt-2">New password</label>
+                    <input id="newpwd" type="password" className="inline w-2/3 mt-2 focus:outline-none" onChange={handlePassword}></input>
+                    <hr className={`border-1 border-black w-full`}/>                   
+                    <label htmlFor="cnfpwd" className="block text-[12px] text-gray-500 font-semibold mt-2">Confirm New Password</label>
+                    <input id="cnfpwd" type="password" className="inline w-2/3 mt-2 focus:outline-none" onChange={handlePassword}></input>
+                    <button className="inline float-right bg-amber-300 rounded-md px-3 py-1 md:px-6 md:py-2 mb-1" onClick={changePassword}>
+                                Change
+                    </button>
+                    <hr className={`border-1 border-black w-full`}/>
+                    {pwdmatch !== 0 &&               
+                        <p className={(pwdmatch != -1) ?"hidden":"block text-red-500"}>Passwords didn't matched</p>
+                    } 
+                    {pwdmatch !== 0 &&               
+                        <p className={(pwdmatch != 1) ?"hidden":"block text-green-500"}>Passwords matched</p>
+                    }                   
                 </form>
             </div>
             <div>

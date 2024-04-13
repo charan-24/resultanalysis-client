@@ -202,7 +202,7 @@ function LeaderBoard (){
     return(
         <div>
             <Navbar/>
-            <div>
+            <div className="">
                 <table className="w-full">
                     <thead>
                         <tr className="thead-row">
@@ -244,10 +244,11 @@ function LeaderBoard (){
                                 <td>{user.spoj}</td>
                                 <td>{user.total}</td>
                             </tr>
-                        ))}                    
+                        ))}   
+                                          
                     </tbody>
                 </table>
-                <button className={role==='Admin'?"block mx-auto bg-amber-300 rounded-md mt-4 px-3 py-1 md:px-6 md:py-2 mb-1":"hidden"} onClick={exportToExcel}>
+                <button className={role==='Admin'?"fixed bottom-4 left-1/2 transform -translate-x-1/2 mx-auto bg-amber-300 rounded-md mt-4 px-3 py-1 md:px-6 md:py-2 mb-1":"hidden"} onClick={exportToExcel}>
                     Download Batch Report
                 </button>
             </div>
