@@ -11,7 +11,7 @@ const Unileaderboard = () => {
     const [Users,setUsers] = useState([]);
     const getUniData = async ()=>{
         let arr = [],finalarr=[];
-        await axios.get('http://localhost:5000/score/getAllBatchScores')
+        await axios.get('https://resultanalysis-server.onrender.com/getAllBatchScores')
                     .then(res=>{
                         const temp = res.data;
                         arr = temp.map((item) => item.rollno)

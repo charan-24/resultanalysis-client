@@ -17,7 +17,7 @@ const ChangeStatus = ({batchname, display, handleChangeStatusModal, handleBatche
 
         console.log(dataObj);
 
-        await axios.post('http://localhost:5000/batch/changeBatchStatus', dataObj,{
+        await axios.post('https://resultanalysis-server.onrender.com/batch/changeBatchStatus', dataObj,{
             headers: {
                 'Content-Type': 'application/json'
                 // Add other headers as needed

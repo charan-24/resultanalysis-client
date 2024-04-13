@@ -16,7 +16,7 @@ function MyAccount(){
     const {auth} = useAuth();
     const rollno = auth.rollno;
 
-    const getUserDetails = async ()=>{ await axios.get('http://localhost:5000/user/fetchUserDetails/'+rollno)
+    const getUserDetails = async ()=>{ await axios.get('https://resultanalysis-server.onrender.com/user/fetchUserDetails/'+rollno)
             .then((res)=>{
                 // console.log(res.data);
                 setUserDetails(res.data);
@@ -120,7 +120,7 @@ function MyAccount(){
                 "key": "password",
                 "value": cnfpwd
             }
-            await axios.post('http://localhost:5000/user/changeAPersonalDetail',dataObj)
+            await axios.post('https://resultanalysis-server.onrender.com/user/changeAPersonalDetail',dataObj)
                         .then((res)=>{
                             alert(res.data.message);
                         })
@@ -143,7 +143,7 @@ function MyAccount(){
             "handle": newHandle
         }
         console.log(dataObj);
-        await axios.post('http://localhost:5000/user/changeAhandle',dataObj)
+        await axios.post('https://resultanalysis-server.onrender.com/user/changeAhandle',dataObj)
                     .then((res)=>{
                         // console.log(res);
                         alert(res.data.message);
@@ -169,7 +169,7 @@ function MyAccount(){
             "key": key.toLowerCase(),
             "value": newPersonalDetail
         }
-        await axios.post('http://localhost:5000/user/changeAPersonalDetail',dataObj)
+        await axios.post('https://resultanalysis-server.onrender.com/user/changeAPersonalDetail',dataObj)
                     .then((res)=>{
                         alert(res.data.message);
                     })

@@ -28,7 +28,7 @@ function LeaderBoard (){
 
     const getScores = async () => {
         const arr = [];
-            await axios.get('http://localhost:5000/score/getScores/'+batchname)
+            await axios.get('https://resultanalysis-server.onrender.com/score/getScores/'+batchname)
                                     .then(res=>{                                    
                                         res.data.forEach((item,index)=>{
                                             const lastlogin = item.lastlogin?.toLocaleString().slice(0,10) ?? "";
@@ -186,7 +186,7 @@ function LeaderBoard (){
     const handleDelUser = async (e) => {
         e.preventDefault();
         const rollno = e.target.id;
-        await axios.delete('http://localhost:5000/batch/deleteUser/'+batchname+'/'+rollno)
+        await axios.delete('https://resultanalysis-server.onrender.com/batch/deleteUser/'+batchname+'/'+rollno)
                     .then(res=>{
                         getScores();
                     })

@@ -4,7 +4,7 @@ import { SiHackerrank, SiLeetcode, SiCodechef, SiCodeforces,SiLinkedin,SiGithub}
 function CodingProfiles(){
     return(
         <div className="lg:w-3/4 lg:mx-auto">
-            <form action="http://localhost:5000/coding-profiles" method="post">
+            <form action="https://resultanalysis-server.onrender.com/coding-profiles" method="post">
                 <p className="block font-bold text-[20px] lg:text-[30px] w-3/4 m-1 mx-auto">Coding profiles</p>
                 <ul className="w-3/4 mx-auto">
                     <li className="mt-2">

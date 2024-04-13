@@ -46,7 +46,7 @@ const AddBatch = ({display, handleShowBatchModal, handleBatches}) =>{
 
     const fetchScores = async (batchData) =>{
         console.log(batchData);
-        await axios.post('http://localhost:5000/score/fetchNewBatchScores',batchData,{
+        await axios.post('https://resultanalysis-server.onrender.com/score/fetchNewBatchScores',batchData,{
             headers: {
                 'Content-Type': 'application/json'
                 // Add other headers as needed
@@ -62,7 +62,7 @@ const AddBatch = ({display, handleShowBatchModal, handleBatches}) =>{
     }
     
     const handlePostReq = async (batchData)=>{
-        await axios.post('http://localhost:5000/batch/addBatch', batchData, {
+        await axios.post('https://resultanalysis-server.onrender.com/batch/addBatch', batchData, {
             headers: {
                 'Content-Type': 'application/json'
                 // Add other headers as needed

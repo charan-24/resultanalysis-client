@@ -24,7 +24,7 @@ const MyProfile = () => {
   const roll = rollno || auth.rollno;
 
   const getScores = async () => {
-    await axios.get('http://localhost:5000/score/getIndScore/'+roll)
+    await axios.get('https://resultanalysis-server.onrender.com/score/getIndScore/'+roll)
                                 .then(res=>{
                                     console.log(res.data);
                                     let temp = Object.values(res.data.scoreObj);

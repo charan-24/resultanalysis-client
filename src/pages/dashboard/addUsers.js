@@ -59,7 +59,7 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
     }
 
     const fetchNewScores = async (batchData)=>{
-        await axios.post('http://localhost:5000/score/fetchNewUserScore',batchData,{
+        await axios.post('https://resultanalysis-server.onrender.com/fetchNewUserScore',batchData,{
             headers: {
                 'Content-Type': 'application/json'
                 // Add other headers as needed
@@ -74,7 +74,7 @@ const AddUsers = ({display, handleShowUserModal, batchname}) =>{
     }
 
     const handlePostReq = async (batchData)=>{
-        await axios.post('http://localhost:5000/batch/addUsers', batchData, {
+        await axios.post('https://resultanalysis-server.onrender.com/batch/addUsers', batchData, {
             headers: {
                 'Content-Type': 'application/json'
                 // Add other headers as needed

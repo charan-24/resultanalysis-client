@@ -64,7 +64,7 @@ function Dashboard() {
 
     const handleBatches = async () => {
         const arr = [];
-        await axios.get('http://localhost:5000/batch/getBatches')
+        await axios.get('https://resultanalysis-server.onrender.com/batch/getBatches')
             .then(res => {
                 console.log(res.data);
                 let foundStudent;
@@ -100,7 +100,7 @@ function Dashboard() {
 
     const handleDeleteABatch = async (e) => {
         e.preventDefault();
-        await axios.delete('http://localhost:5000/batch/deleteBatch/' + e.target.id)
+        await axios.delete('https://resultanalysis-server.onrender.com/batch/deleteBatch/' + e.target.id)
             .then(res => handleBatches())
             .catch(err => console.error(err));
     }
@@ -121,7 +121,7 @@ function Dashboard() {
 
     const sendReminders = async (e) => {
         e.preventDefault();
-        await axios.get('http://localhost:5000/batch/getBatches')
+        await axios.get('https://resultanalysis-server.onrender.com/batch/getBatches')
                     .then((res)=>{
                         const batches = res.data;
                         for(let i=0;i<batches.length;i++){

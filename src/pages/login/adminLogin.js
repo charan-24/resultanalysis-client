@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 function AdminLogin() {
+    const server  = process.env.SERVER;
     const navigate = useNavigate();
     const [showpwd,setShowpd] = useState("Show password");
     const [pwdtype,setPwdtype] = useState(1);
@@ -30,7 +31,7 @@ function AdminLogin() {
             password
         }
         // console.log(userData);
-        await axios.post('http://localhost:5000/login/adminLogin',userData)
+        await axios.post('https://resultanalysis-server.onrender.com/login/adminLogin',userData)
                     .then(res=>{
                         sessionStorage.setItem("username",username);
                         // sessionStorage.setItem("fullname",res.data.fullname);

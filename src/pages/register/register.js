@@ -39,7 +39,7 @@ function Register(){
                             {<FcGoogle className="inline" />} Register with google
                         </button>
                     </div>
-                    <form className="text-start bg-white ring-slate-50 mt-4" action="http://localhost:5000/register" method="post">
+                    <form className="text-start bg-white ring-slate-50 mt-4" action="https://resultanalysis-server.onrender.com/register" method="post">
                         <label htmlFor="mail" className="block text-[16px] font-lato">Full Name</label>                    
                         <input id="mail" type="text" name="mail" className="mb-4 h-[43px]  bg-[#F5F5F5] rounded w-full focus:outline-none font-lato"/> 
                         <label htmlFor="username" className="block text-[16px]  font-lato">Username</label>                    
