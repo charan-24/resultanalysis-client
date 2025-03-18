@@ -11,6 +11,7 @@ function UserLogin() {
     const [wrongUser,setWrongUser] = useState(0);
     const [wrongPass,setWrongPass] = useState(0);
     const {setAuth} = useAuth();
+    const {server} = useAuth();
 
     const handlePassword = ()=>{
         if(pwdtype){
@@ -31,7 +32,7 @@ function UserLogin() {
             password
         }
         // console.log(userData);
-        await axios.post('https://resultanalysis-server.onrender.com/login/handleLogin',userData)
+        await axios.post(`${server}/login/handleLogin`,userData)
                     .then(res=>{
                         sessionStorage.setItem("rollno",username);
                         sessionStorage.setItem("fullname",res.data.fullname);
@@ -74,7 +75,7 @@ function UserLogin() {
                 </div>
             </div>         
             <div className="mx-auto lg:mt-[6rem] xl:w-3/4 bg-[#F8FAFF]">
-                    <h1 className="text-4xl text-center md:text-left mt-10 md:mt-10 m-4 font-bold ml-4">Sudent Login</h1>
+                    <h1 className="text-4xl text-center md:text-left mt-10 md:mt-10 m-4 font-bold ml-4">Student Login</h1>
                     <h2 className="text-xs mt-2 text-center md:text-left m-4 font-lato">Sign into your account</h2>
                     <div className="">
                         {/* <div className="block m-4">
