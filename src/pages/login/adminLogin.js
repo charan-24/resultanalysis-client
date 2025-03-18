@@ -3,8 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
+const server  = process.env.REACT_APP_SERVER || 'http://localhost:5000';
 function AdminLogin() {
-    const server  = process.env.SERVER;
     const navigate = useNavigate();
     const [showpwd,setShowpd] = useState("Show password");
     const [pwdtype,setPwdtype] = useState(1);
@@ -30,8 +30,8 @@ function AdminLogin() {
             username,
             password
         }
-        // console.log(userData);
-        await axios.post('https://resultanalysis-server.onrender.com/login/adminLogin',userData)
+        console.log(`server: ${server}`);
+        await axios.post(`${server}/login/adminLogin`,userData)
                     .then(res=>{
                         sessionStorage.setItem("username",username);
                         // sessionStorage.setItem("fullname",res.data.fullname);

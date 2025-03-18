@@ -2,6 +2,7 @@ import React,{useEffect, useState} from "react";
 import { RxCross1 } from "react-icons/rx";
 import * as XLSX from 'xlsx';
 import axios from 'axios';
+import useAuth from "../../hooks/useAuth";
 
 const AddBatch = ({display, handleShowBatchModal, handleBatches}) =>{
     const [selectedFile,setSelectedFile] = useState(null);
